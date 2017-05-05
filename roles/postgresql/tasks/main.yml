@@ -1,0 +1,7 @@
+---
+- name: Install postgresql and deps
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - postgresql
+    - postgresql-client
+    - postgresql-common

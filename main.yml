@@ -1,0 +1,15 @@
+---
+- name: Install kun.org.uk
+  hosts: main
+  remote_user: kd
+  become: true
+  become_method: sudo
+  
+  roles:
+    - nginx
+    - php-fpm
+    - mailserver
+    - fail2ban
+    - postgresql
+    - mysql
+    - davical

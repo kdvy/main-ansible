@@ -1,0 +1,14 @@
+---
+- name: Install php-fpm and deps
+  apt: name={{ item }} state=present
+  with_items:
+    - php
+    - php-cli
+    - php-curl
+    - php-fpm
+    - php-gd
+    - php-json
+    - php-mysql
+    - php-pgsql
+    - php-intl
+    - php-readline
