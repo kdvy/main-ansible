@@ -7,9 +7,9 @@
     - mysql-common
     - python-mysqldb
 
-- mysql_user: name="root"
-              password="treetuscanmonk"
+- mysql_user: name="{{ mysql_user }}"
+              password="{{ mysql_pass }}"
               check_implicit_admin=yes
-              login_user="root"
-              login_password=""
+              login_user="{{ login_mysql_user }}"
+              login_password="{{ login_mysql_pass }"
               state=present

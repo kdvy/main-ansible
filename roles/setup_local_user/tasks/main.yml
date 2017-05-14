@@ -1,0 +1,21 @@
+---
+- name: "Create a secondary, non-root user"
+  user: name={{ linode_user }} 
+        password={{ linode_pass_hash }}
+        shell=/bin/bash
+- name: Add remote authorized key to allow future passwordless logins
+  authorized_key: user={{ linode_user }} key="{{ lookup('file', linode_ssh_pub) }}"
+- name: "Add normal user to sudoers"
+  lineinfile: dest=/etc/sudoers
+              regexp="{{ linode_user }} ALL"
+              line="{{ linode_user }} ALL=(ALL) NOPASSWD:ALL"
+              state=present
+- name: "Disallow root SSH access"
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="^PermitRootLogin"
+              line="PermitRootLogin no"
+              state=present
+  notify: Restart ssh
+- name: "Update apt-cache"
+  apt: 
+    update_cache: yes

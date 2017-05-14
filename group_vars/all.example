@@ -1,0 +1,11 @@
+---
+linode_api_key: ''
+linode_root_pass: ''
+linode_pass_hash: ''
+linode_user: ''
+linode_ssh_pub: ''
+linode_ssh_key: ''
+mysql_user: ''
+mysql_pass: ''
+login_mysql_user: ''
+login_mysql_pass: ''

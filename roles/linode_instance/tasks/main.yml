@@ -1,0 +1,21 @@
+---
+- name: Create linode instance
+  linode:
+    api_key: "{{ linode_api_key }}"
+    name: main
+    plan: 1 #1GB
+    datacenter: 7 #London
+    distribution: 146 #Ubuntu 16.04 LTS
+    password: "{{ linode_root_pass }}"
+    ssh_pub_key: "{{ linode_ssh_key }}"
+    swap: 512
+    wait: yes
+    wait_timeout: 300
+    state: started
+  register: new_linode
+- name: Add linode to hosts
+  add_host:
+    name: "{{ new_linode['instance']['ipv4'] }}"
+    groups: main
+- pause:
+    seconds: 15

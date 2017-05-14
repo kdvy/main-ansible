@@ -1,13 +1,22 @@
 ---
-- name: Install kun.org.uk
+- name: Setup instance
+  hosts: localhost
+  roles:
+    - linode_instance
+
+- name: Setup local user
   hosts: main
-  remote_user: kd
+  remote_user: root
+  roles:
+    - setup_local_user
+
+- name: Install applications
+  hosts: main
   become: true
   become_method: sudo
-  
   roles:
     - nginx
-    - php-fpm
+    - php5.6-fpm
     - mailserver
     - fail2ban
     - postgresql
